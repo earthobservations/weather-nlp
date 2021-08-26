@@ -18,9 +18,25 @@ Goals
 - Ist es morgen regnerisch?
 
 
-Synopsis
-========
+Setup
+=====
 ::
+
+    make setup
+
+
+Run tests
+=========
+::
+
+    make test
+
+
+Usage
+=====
+::
+
+    source .venv/bin/activate
 
     python wq.py hourly temperatures in Potsdam on 2020-09-15
     python wq.py maximum temperature in Munich tomorrow
@@ -36,17 +52,3 @@ Synopsis
     python wq.py Sonnenschein auf Helgoland
     python wq.py Ozonwerte in Freiburg
     python wq.py Nebel im Taunus
-
-
-Setup
-=====
-::
-
-    make setup
-
-
-Run tests
-=========
-::
-
-    make test
