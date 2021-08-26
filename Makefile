@@ -26,8 +26,8 @@ setup-virtualenv:
 # Setup prerequisites
 setup: setup-virtualenv
 	$(pip) install --requirement=requirements.txt
-	$(spacy) download en
-	$(spacy) download de
+	$(python) -m spacy download en
+	$(python) -m spacy download de
 
 # Setup Flair
 setup-flair: setup-virtualenv
