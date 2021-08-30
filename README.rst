@@ -57,6 +57,8 @@ Usage
     python wq.py maximum temperature in Munich tomorrow
     python wq.py snow depth on Zugspitze
     python wq.py Sunshine in Kharagpur
+    python wq.py Rain in Chengdu
+    python wq.py Temperature in Nanchang
 
     # German
     python wq.py Stuendliche Temperaturen in Berlin, gestern um 23:00 Uhr

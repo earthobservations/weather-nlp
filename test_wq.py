@@ -38,6 +38,21 @@ def test_english_particulates():
     assert result == Result(where="Stuttgart", when="2020-09", what="particulate")
 
 
+def test_english_city_from_india():
+    result = analyze_spacy("Sunshine in Kharagpur")
+    assert result == Result(where="Kharagpur", when="now", what="Sunshine")
+
+
+def test_english_city_from_china():
+    result = analyze_spacy("Temperature in Nanchang")
+    assert result == Result(where="Nanchang", when="now", what="temperature")
+
+
+def test_english_city_without_named_entity():
+    result = analyze_spacy("Rain in Chengdu")
+    assert result == Result(where="Chengdu", when="now", what="rain")
+
+
 def test_german_long():
     result = analyze_spacy("Stuendliche Temperaturen in Berlin, gestern um 23:00 Uhr")
     assert result == Result(

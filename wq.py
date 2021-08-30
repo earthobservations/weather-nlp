@@ -181,6 +181,13 @@ def improve_with_heuristics(nlp, expression, sentence):
         parts = [t.lemma_ for t in w]
         where = " ".join(parts).title()
 
+    # Rain in Chengdu
+    if where is None:
+        try:
+            where = list(sentence.noun_chunks)[1].lemma_
+        except IndexError:
+            pass
+
     result = Result(where=where, when=when, what=what)
     return result
 
