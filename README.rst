@@ -74,6 +74,12 @@ Usage
     python wq.py Berliner Tagestemperatur um 11:00 Uhr
     python wq.py Berliner Tagestemperaturen um 11:00 Uhr
 
+    # Chinese
+    python wq.py 成都的雨
+    python wq.py 南昌的温度
+    python wq.py 南昌明天的温度
+    python wq.py 2020年9月17日南昌市的温度
+
 
 .. _Flair: https://pypi.org/project/flair/
 .. _spaCy: https://pypi.org/project/spacy/

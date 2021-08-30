@@ -88,3 +88,31 @@ def test_german_ozon():
 def test_german_particulates():
     result = analyze_spacy("Feinstaub in Stuttgart am 17.09.2020")
     assert result == Result(where="Stuttgart", when="am 17.09.2020", what="Feinstaub")
+
+
+def test_chinese_rain():
+    # Rain in Chengdu
+    # Translated using DeepL
+    result = analyze_spacy("成都的雨")
+    assert result == Result(where="成都", when="now", what="雨")
+
+
+def test_chinese_temperature_now():
+    # Temperature in Nanchang
+    # Translated using DeepL
+    result = analyze_spacy("南昌的温度")
+    assert result == Result(where="南昌", when="now", what="温度")
+
+
+def test_chinese_temperature_tomorrow():
+    # Temperature in Nanchang tomorrow
+    # Translated using DeepL
+    result = analyze_spacy("南昌明天的温度")
+    assert result == Result(where="南昌", when="明天", what="温度")
+
+
+def test_chinese_temperature_on_date():
+    # Temperature in Nanchang on 2020-09-17
+    # Translated using DeepL
+    result = analyze_spacy("2020年9月17日南昌市的温度")
+    assert result == Result(where="南昌市", when="2020年9月17日", what="温度")
