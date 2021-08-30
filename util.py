@@ -15,7 +15,7 @@ class DocHelper:
             if entity.label_ in types:
                 yield entity
 
-    def find_tags(self, types):
+    def find_tags(self, *types):
         for token in self.doc:
             if token.tag_ in types:
                 yield token

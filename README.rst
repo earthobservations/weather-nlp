@@ -72,6 +72,7 @@ Usage
     python wq.py Ozonwerte in Freiburg
     python wq.py Nebel im Taunus
 
+    python wq.py Feinstaub in Stuttgart am 17.09.2020
 
 
 .. _Flair: https://pypi.org/project/flair/

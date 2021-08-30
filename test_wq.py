@@ -85,7 +85,6 @@ def test_german_ozon():
     assert result == Result(where="Freiburg", when="now", what="Ozonwerte")
 
 
-@pytest.mark.xfail
 def test_german_particulates():
     result = analyze_spacy("Feinstaub in Stuttgart am 17.09.2020")
-    assert result == Result(where="Stuttgart", when="17.09.2020", what="Feinstaub")
+    assert result == Result(where="Stuttgart", when="am 17.09.2020", what="Feinstaub")

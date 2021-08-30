@@ -133,7 +133,7 @@ def improve_with_heuristics(nlp, expression, sentence):
     try:
         what = list(sentence.noun_chunks)[0].lemma_.title()
     except IndexError:
-        what = dh.find_token("NOUN")
+        what = dh.find_token("NOUN", "PER")
 
     # TODO: Use "pop_name" here.
     # where = dh.find_name("GPE", "LOC", "MISC", lemma=True).capitalize()
@@ -141,15 +141,15 @@ def improve_with_heuristics(nlp, expression, sentence):
     when = dh.find_name("DATE")
 
     if when is None:
-        items = list(dh.find_tags("APPR"))
+        items = list(dh.find_tags("APPR", "APPRART"))
         # print(list(find_tag("APPR", pure=True).subtree))
-        for item in dh.find_tags("APPR"):
+        for item in items:
             subtree = list(item.subtree)
-            if len(subtree) >= 3:
+            if len(subtree) >= 2:
                 when = " ".join(map(str, subtree))
 
     # Berliner Temperatur => Temperatur
-    if what is not None:
+    if what is not None and where is not None and where in what:
         for entity in sentence.ents:
             if entity.label_ not in ["TIME", "DATE"]:
                 what = what.replace(entity.text, "")
