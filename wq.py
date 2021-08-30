@@ -61,6 +61,14 @@ def detect_language(text: str):
     doc = nlp(text)
     language = doc._.language["language"]
 
+    # Correct language misdetections.
+    if language == "ko":
+        language = "zh-cn"
+
+    # Map language to model.
+    if language == "zh-cn":
+        language = "zh_core_web_md"
+
     return language
 
 
@@ -198,6 +206,13 @@ def improve_with_heuristics(nlp, expression, sentence):
             where = list(sentence.noun_chunks)[1].lemma_
         except IndexError:
             pass
+
+    # "Temperature in Nanchang on 2020-09-17" in Chinese: "2020年9月17日南昌市的温度"
+    if what in when:
+        for noun in dh.find_tokens("NOUN"):
+            if noun.lemma_ in when:
+                continue
+            what = noun.lemma_
 
     result = Result(where=where, when=when, what=what)
     return result

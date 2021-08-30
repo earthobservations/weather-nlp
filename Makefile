@@ -26,8 +26,9 @@ setup-virtualenv:
 # Setup prerequisites
 setup: setup-virtualenv
 	$(pip) install --requirement=requirements.txt
-	$(python) -m spacy download en
-	$(python) -m spacy download de
+	$(python) -m spacy download en_core_web_md
+	$(python) -m spacy download de_core_news_md
+	$(python) -m spacy download zh_core_web_md
 
 # Setup Flair
 setup-flair: setup-virtualenv
