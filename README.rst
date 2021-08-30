@@ -29,7 +29,9 @@ like `Wetterdienst`_. Currently, this is not implemented yet.
 For the NLP task, the program evaluates the fine Python libraries `spaCy`_ and
 `Flair`_.
 
-Contributions are always welcome.
+As this is project is in its early stages, contributions are very welcome.
+Specifically, it would be sweet to see tests for languages other than English
+or German.
 
 
 Setup
@@ -53,26 +55,24 @@ Usage
     source .venv/bin/activate
 
     # English
-    python wq.py hourly temperatures in Potsdam on 2020-09-15
-    python wq.py maximum temperature in Munich tomorrow
-    python wq.py snow depth on Zugspitze
+    python wq.py Snow depth on Zugspitze
     python wq.py Sunshine in Kharagpur
     python wq.py Rain in Chengdu
     python wq.py Temperature in Nanchang
+    python wq.py Particulates in Stuttgart on 2020-09-17
+    python wq.py hourly temperatures in Potsdam on 2020-09-15
+    python wq.py maximum temperature in Munich tomorrow
 
     # German
+    python wq.py Sonnenschein auf Helgoland
+    python wq.py Ozonwerte in Freiburg
+    python wq.py Nebel im Taunus
+    python wq.py Feinstaub in Stuttgart am 17.09.2020
     python wq.py Stuendliche Temperaturen in Berlin, gestern um 23:00 Uhr
-
     python wq.py Berliner Temperaturen um 11:00 Uhr
     python wq.py Taegliche Berliner Temperaturen im Juli
     python wq.py Berliner Tagestemperatur um 11:00 Uhr
     python wq.py Berliner Tagestemperaturen um 11:00 Uhr
-
-    python wq.py Sonnenschein auf Helgoland
-    python wq.py Ozonwerte in Freiburg
-    python wq.py Nebel im Taunus
-
-    python wq.py Feinstaub in Stuttgart am 17.09.2020
 
 
 .. _Flair: https://pypi.org/project/flair/
