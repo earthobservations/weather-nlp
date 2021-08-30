@@ -131,7 +131,7 @@ def improve_with_heuristics(nlp, expression, sentence):
     # A. Extraction
 
     try:
-        what = list(sentence.noun_chunks)[0].lemma_
+        what = list(sentence.noun_chunks)[0].lemma_.title()
     except IndexError:
         what = dh.find_token("NOUN")
 

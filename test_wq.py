@@ -14,28 +14,28 @@ def test_english_now():
 def test_english_long():
     result = analyze_spacy("hourly temperatures in Potsdam on 2020-09-15")
     assert result == Result(
-        where="Potsdam", when="2020-09-15", what="hourly temperature"
+        where="Potsdam", when="2020-09-15", what="Hourly Temperature"
     )
 
 
 def test_english_forecast_maxtemp():
     result = analyze_spacy("maximum temperature in munich tomorrow")
-    assert result == Result(where="Munich", when="tomorrow", what="maximum temperature")
+    assert result == Result(where="Munich", when="tomorrow", what="Maximum Temperature")
 
 
 def test_english_forecast_rain():
     result = analyze_spacy("rain probability tomorrow in berlin")
-    assert result == Result(where="Berlin", when="tomorrow", what="rain probability")
+    assert result == Result(where="Berlin", when="tomorrow", what="Rain Probability")
 
 
 def test_english_snowdepth():
     result = analyze_spacy("snow depth on Zugspitze")
-    assert result == Result(where="Zugspitze", when="now", what="snow depth")
+    assert result == Result(where="Zugspitze", when="now", what="Snow Depth")
 
 
 def test_english_particulates():
     result = analyze_spacy("Particulates in Stuttgart on 2020-09-17")
-    assert result == Result(where="Stuttgart", when="2020-09", what="particulate")
+    assert result == Result(where="Stuttgart", when="2020-09", what="Particulate")
 
 
 def test_english_city_from_india():
@@ -45,12 +45,12 @@ def test_english_city_from_india():
 
 def test_english_city_from_china():
     result = analyze_spacy("Temperature in Nanchang")
-    assert result == Result(where="Nanchang", when="now", what="temperature")
+    assert result == Result(where="Nanchang", when="now", what="Temperature")
 
 
 def test_english_city_without_named_entity():
     result = analyze_spacy("Rain in Chengdu")
-    assert result == Result(where="Chengdu", when="now", what="rain")
+    assert result == Result(where="Chengdu", when="now", what="Rain")
 
 
 def test_german_long():
