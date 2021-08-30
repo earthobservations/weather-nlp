@@ -29,7 +29,7 @@ def test_english_forecast_rain():
 
 
 def test_english_snowdepth():
-    result = analyze_spacy("snow depth on Zugspitze")
+    result = analyze_spacy("Snow depth on Zugspitze")
     assert result == Result(where="Zugspitze", when="now", what="Snow Depth")
 
 

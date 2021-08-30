@@ -6,6 +6,7 @@ import sys
 from dataclasses import dataclass
 
 import spacy
+from spacy_langdetect import LanguageDetector
 
 from util import DocHelper
 
@@ -21,28 +22,38 @@ class Result:
     what: str
 
 
-models = {}
+use_models = {}
+english_model = None
 
 
 def load_model(name):
 
-    global models
+    global use_models
 
-    if name in models:
-        nlp = models[name]
+    if name in use_models:
+        nlp = use_models[name]
     else:
         nlp = spacy.load(name)
-        models[name] = nlp
+        use_models[name] = nlp
 
     return nlp
 
 
 def detect_language(text: str):
-    import spacy
-    from spacy_langdetect import LanguageDetector
+
+    # Short-circuit misdetections.
+    # Why? "snow depth on Zugspitze" is sometimes detected as German.
+    if "snow" in text.lower():
+        return "en"
+
+    global english_model
+
+    if english_model is None:
+        english_model = spacy.load("en")
+
+    nlp = english_model
 
     # Detect language.
-    nlp = load_model("en")
     try:
         nlp.add_pipe(LanguageDetector(), name="language_detector", last=True)
     except:
