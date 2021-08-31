@@ -34,6 +34,7 @@ def load_model(name):
         nlp = use_models[name]
     else:
         nlp = spacy.load(name)
+        # nlp = spacy.blank(name)
         use_models[name] = nlp
 
     return nlp
@@ -43,7 +44,7 @@ def detect_language(text: str):
 
     # Short-circuit misdetections.
     # Why? "snow depth on Zugspitze" is sometimes detected as German.
-    if "snow" in text.lower():
+    if "snow" in text.lower() or "rain" in text.lower():
         return "en"
 
     global english_model
@@ -72,12 +73,39 @@ def detect_language(text: str):
     return language
 
 
+def translate(from_language, to_language, text):
+    # Load translator.
+    from argostranslate import package, translate
+
+    model_name = f"{from_language}_{to_language}"
+    model_file = f"./var/translate-{model_name}-1.1.argosmodel"
+    logger.info(f"Loading translation model from {model_file}")
+    package.install_from_path(model_file)
+    installed_languages = translate.get_installed_languages()
+    translation_from, translation_to = installed_languages
+
+    # Invoke translation.
+    translator = translation_to.get_translation(translation_from)
+    return translator.translate(text)
+
+
 def analyze_spacy(expression: str):
 
     # Load language-specific tokenizer, tagger, parser, NER and word vectors.
     language = detect_language(expression)
-    print(f"Language: {language}")
+    logger.info(f"Language: {language}")
 
+    if language in ["hi"]:
+
+        # Translate text.
+        expression = translate(language, "en", expression)
+        logger.info(f"Analyzing translation '{expression}'")
+
+        # Load language-specific tokenizer, tagger, parser, NER and word vectors.
+        language = detect_language(expression)
+        logger.info(f"Language: {language}")
+
+    # Analyze expression.
     nlp = load_model(language)
     sentence = nlp(expression)
 

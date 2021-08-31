@@ -2,6 +2,10 @@ numpy==1.21.2
 spacy<3
 spacy-langdetect
 
+# Chinese
 # https://github.com/lancopku/pkuseg-python/issues/148
 # https://github.com/explosion/spaCy/discussions/7370#discussioncomment-455375
 https://github.com/lancopku/pkuseg-python/archive/d581c95.zip
+
+# Hindi
+argostranslate

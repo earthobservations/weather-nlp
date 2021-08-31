@@ -80,6 +80,12 @@ Usage
     python wq.py 南昌明天的温度
     python wq.py 2020年9月17日南昌市的温度
 
+    # Hindi
+    python wq.py खड़गपुर में बारिश
+    python wq.py खड़गपुर में धूप
+    python wq.py कल खड़गपुर में धूप
+    python wq.py 2020-09-17 को खड़गपुर में धूप
+
 
 .. _Flair: https://pypi.org/project/flair/
 .. _spaCy: https://pypi.org/project/spacy/
