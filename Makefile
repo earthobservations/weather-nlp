@@ -29,6 +29,7 @@ setup: setup-virtualenv
 	$(python) -m spacy download en_core_web_md
 	$(python) -m spacy download de_core_news_md
 	$(python) -m spacy download zh_core_web_md
+	wget https://argosopentech.nyc3.digitaloceanspaces.com/argospm/translate-hi_en-1.1.argosmodel --directory-prefix=./var --no-clobber
 
 # Setup Flair
 setup-flair: setup-virtualenv

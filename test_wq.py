@@ -90,7 +90,7 @@ def test_german_particulates():
     assert result == Result(where="Stuttgart", when="am 17.09.2020", what="Feinstaub")
 
 
-def test_chinese_rain():
+def test_chinese_rain_now():
     # Rain in Chengdu
     # Translated using DeepL
     result = analyze_spacy("成都的雨")
@@ -116,3 +116,32 @@ def test_chinese_temperature_on_date():
     # Translated using DeepL
     result = analyze_spacy("2020年9月17日南昌市的温度")
     assert result == Result(where="南昌市", when="2020年9月17日", what="温度")
+
+
+def test_hindi_rain_now():
+    # Rain in Kharagpur
+    # Translated using Google Translate
+    result = analyze_spacy("खड़गपुर में बारिश")
+    assert result == Result(where="Kharagpur", when="now", what="Rain")
+
+
+def test_hindi_sunshine_now():
+    # Sunshine in Kharagpur
+    # Translated using Google Translate
+    result = analyze_spacy("खड़गपुर में धूप")
+    assert result == Result(where="Kharagpur", when="now", what="Sunshine")
+
+
+def test_hindi_sunshine_tomorrow():
+    # Sunshine in Kharagpur tomorrow
+    # Translated using Google Translate
+    result = analyze_spacy("कल खड़गपुर में धूप")
+    assert result == Result(where="Kharagpur", when="tomorrow", what="Sunshine")
+
+
+@pytest.mark.xfail
+def test_hindi_sunshine_on_date():
+    # Sunshine in Kharagpur on 2020-09-17
+    # Translated using Google Translate
+    result = analyze_spacy("2020-09-17 को खड़गपुर में धूप")
+    assert result == Result(where="Kharagpur", when="2020-09-17", what="Sunshine")
