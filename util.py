@@ -10,7 +10,7 @@ class DocHelper:
             if token.pos_ in types:
                 yield token
 
-    def find_names(self, types):
+    def find_names(self, *types):
         for entity in self.doc.ents:
             if entity.label_ in types:
                 yield entity
@@ -26,7 +26,7 @@ class DocHelper:
             return items[0].lemma_
 
     def find_name(self, *types, lemma=False):
-        items = list(self.find_names(types))
+        items = list(self.find_names(*types))
         if items:
             if lemma:
                 return items[0].lemma_

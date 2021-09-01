@@ -176,15 +176,36 @@ def improve_with_heuristics(nlp, expression, sentence):
     dh = DocHelper(sentence)
 
     # A. Extraction
-
     try:
-        what = list(sentence.noun_chunks)[0].lemma_.title()
+        what_candidates = list(sentence.noun_chunks)
+
+        # Improvements for "test_wigmore.py".
+        # Remove personal pronouns, e.g. "me".
+        # Remove other pronouns, e.g. "what".
+        effective_candidates = []
+        tags = list(dh.find_tags("PRP", "WP"))
+        for candidate in what_candidates:
+            if tags:
+                for tag in tags:
+                    if candidate.text == tag.text:
+                        continue
+                    effective_candidates.append(candidate)
+            else:
+                effective_candidates.append(candidate)
+
+        # TODO: Maybe use ".root" here.
+        what = effective_candidates[0].lemma_.title()
     except IndexError:
         what = dh.find_token("NOUN", "PER")
 
     # TODO: Use "pop_name" here.
     # where = dh.find_name("GPE", "LOC", "MISC", lemma=True).capitalize()
-    where = dh.find_name("GPE", "LOC", "MISC")
+    where_objects = list(dh.find_names("GPE", "LOC", "MISC"))
+    where = None
+    if where_objects:
+        where = ", ".join(map(str, where_objects))
+
+    # TODO: Use ".root" in order to strip off "the" from e.g. "the 6th January 1975"
     when = dh.find_name("DATE")
 
     if when is None:
@@ -223,7 +244,9 @@ def improve_with_heuristics(nlp, expression, sentence):
             when = "now"
 
     # B. Formatting
-    if where is not None:
+
+    # TODO: Improve "title" formatting for all occasions.
+    if where is not None and "," not in where:
         w = nlp(where)
         parts = [t.lemma_ for t in w]
         where = " ".join(parts).title()
@@ -235,7 +258,7 @@ def improve_with_heuristics(nlp, expression, sentence):
         except IndexError:
             pass
 
-    # "Temperature in Nanchang on 2020-09-17" in Chinese: "2020年9月17日南昌市的温度"
+    # Disambiguate "Temperature in Nanchang on 2020-09-17" in Chinese: "2020年9月17日南昌市的温度"
     if what in when:
         for noun in dh.find_tokens("NOUN"):
             if noun.lemma_ in when:
