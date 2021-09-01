@@ -26,8 +26,8 @@ This is just a humble evaluation for parsing human-readable sentences into a
 structured type in order to be passed on to a weather data acquisition library
 like `Wetterdienst`_. Currently, this is not implemented yet.
 
-For the NLP task, the program evaluates the fine Python libraries `spaCy`_ and
-`Flair`_.
+For the `NLP`_ task, the program evaluates the fine Python libraries `spaCy`_
+and `Flair`_.
 
 As this is project is in its early stages, contributions are very welcome.
 Specifically, it would be sweet to see tests for languages other than English
@@ -88,5 +88,7 @@ Usage
 
 
 .. _Flair: https://pypi.org/project/flair/
+.. _Natural language processing: https://en.wikipedia.org/wiki/Natural_language_processing
+.. _NLP: https://en.wikipedia.org/wiki/Natural_language_processing
 .. _spaCy: https://pypi.org/project/spacy/
 .. _Wetterdienst: https://github.com/earthobservations/wetterdienst
