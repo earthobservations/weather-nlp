@@ -12,6 +12,8 @@ $(eval pip          := $(venvpath)/bin/pip)
 $(eval python       := $(venvpath)/bin/python)
 $(eval spacy        := $(venvpath)/bin/spacy)
 $(eval pytest       := $(venvpath)/bin/pytest)
+$(eval black        := $(venvpath)/bin/black)
+$(eval isort        := $(venvpath)/bin/isort)
 
 
 # -----
@@ -41,3 +43,8 @@ setup-flair: setup-virtualenv
 # Run tests
 test:
 	$(pytest) -vvv
+
+# Format code
+format:
+	isort .
+	black .
